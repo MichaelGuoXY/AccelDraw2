@@ -19,8 +19,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var vibrEnableBtn: UIButton!
     @IBOutlet weak var stickModeBtn: UIButton!
     @IBOutlet weak var settingsBtn: UIButton!
+    @IBOutlet weak var ballModeBtn: UIButton!
     
-    var isVibrEnable = false;
+    var isVibrEnable = false
+    var ballMode = true
     
     var session = CMMotionManager()
     var stickMode = true
@@ -33,6 +35,8 @@ class ViewController: UIViewController {
     var blue = CGFloat(0)
     var brushSize = CGFloat(5)
     var speed = CGFloat(5)
+    
+    var magic_ball = UIImage(named: "magic_ball")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +54,19 @@ class ViewController: UIViewController {
         settingsBtn.layer.borderWidth = CGFloat(1.0)
         settingsBtn.layer.borderColor = UIColor.blueColor().CGColor
         settingsBtn.layer.cornerRadius = CGFloat(6)
+        ballModeBtn.layer.borderWidth = CGFloat(1.0)
+        ballModeBtn.layer.borderColor = UIColor.blueColor().CGColor
+        ballModeBtn.layer.cornerRadius = CGFloat(6)
         
         // Do any additional setup after loading the view, typically from a nib.
         
+        
+    }
+    func accelSession() {
+        if(!startDrawing) {
+            session.stopAccelerometerUpdates()
+            return
+        }
         
         session.accelerometerUpdateInterval = 1.0/60.0
         
@@ -77,31 +91,36 @@ class ViewController: UIViewController {
             
             nextPoint = self.stickMode ? self.stickToBounds(nextPoint) : self.bounceOnBounds(nextPoint)
             
-            self.drawLine(fromPoint: self.currPoint, toPoint: nextPoint)
+            self.ballMode ? self.drawBall(atPoint: nextPoint) : self.drawLine(fromPoint: self.currPoint, toPoint: nextPoint)
             
             self.currPoint = nextPoint
             self.coorTextField.text = String(format: "x: %.0f y: %.0f", self.currPoint.x, self.currPoint.y)
         }
     }
     
-    func drawLine(fromPoint a: CGPoint, toPoint b: CGPoint) {
-        if(!startDrawing) {
-            return
-        }
+    func drawBall(atPoint p: CGPoint) {
+        
         
         UIGraphicsBeginImageContext(self.imageView.frame.size)
         
         let context = UIGraphicsGetCurrentContext()
+        // clear context before drawing
+        CGContextClearRect(context, self.imageView.frame)
+
+        self.magic_ball = self.resizeImage(UIImage(named: "magic_ball")!, scale: brushSize/15.0)
+        self.magic_ball?.drawAtPoint(p)
+
+        self.imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         
-        //        if true {
-        //            // without bug
-        //            self.imageView.image?.drawInRect(CGRectMake(0, 0,
-        //                self.view.frame.size.width,
-        //                self.view.frame.size.height))
-        //        } else {
-        //            // with bug
-        //            self.imageView.image?.drawInRect(self.imageView.frame)
-        //        }
+        UIGraphicsEndImageContext()
+    }
+    
+    func drawLine(fromPoint a: CGPoint, toPoint b: CGPoint) {
+        
+        
+        UIGraphicsBeginImageContext(self.imageView.frame.size)
+        
+        let context = UIGraphicsGetCurrentContext()
         
         self.imageView.image?.drawInRect(
             CGRectMake(0, 0,
@@ -137,9 +156,9 @@ class ViewController: UIViewController {
         var nextPoint = point
         
         let leftBound = self.imageView.bounds.origin.x
-        let rightBound = leftBound + self.imageView.bounds.size.width
+        let rightBound = self.ballMode ? leftBound + self.imageView.bounds.size.width - (self.magic_ball?.size.width)! : leftBound + self.imageView.bounds.size.width
         let topBound = self.imageView.bounds.origin.y
-        let botBound = topBound + self.imageView.bounds.size.height
+        let botBound = self.ballMode ? topBound + self.imageView.bounds.size.height - (self.magic_ball?.size.height)! : topBound + self.imageView.bounds.size.height
         
         if(nextPoint.x < leftBound) {
             nextPoint.x = leftBound
@@ -162,9 +181,9 @@ class ViewController: UIViewController {
         var nextPoint = point
         
         let leftBound = self.imageView.bounds.origin.x
-        let rightBound = leftBound + self.imageView.bounds.size.width
+        let rightBound = self.ballMode ? leftBound + self.imageView.bounds.size.width - (self.magic_ball?.size.width)! : leftBound + self.imageView.bounds.size.width
         let topBound = self.imageView.bounds.origin.y
-        let botBound = topBound + self.imageView.bounds.size.height
+        let botBound = self.ballMode ? topBound + self.imageView.bounds.size.height - (self.magic_ball?.size.height)! : topBound + self.imageView.bounds.size.height
         
         if(nextPoint.x < leftBound || nextPoint.x > rightBound || nextPoint.y < topBound || nextPoint.y > botBound) {
             if(isVibrEnable) {
@@ -204,10 +223,14 @@ class ViewController: UIViewController {
         imageView.image = nil
         touchCount = 0
         startDrawing = false
+        self.accelSession()
         touchCountTextField.text = "\(touchCount) touches"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if(!self.view.userInteractionEnabled) {
+            return
+        }
         touchCount += 1
         touchCountTextField.text = "\(touchCount) touches"
         if(touchCount%2 == 1) {
@@ -218,6 +241,8 @@ class ViewController: UIViewController {
         } else {
             startDrawing = false
         }
+        
+        self.accelSession()
     }
     @IBAction func bounceModeBtnClicked(sender: UIButton) {
         self.stickMode = !self.stickMode
@@ -234,6 +259,33 @@ class ViewController: UIViewController {
         }else {
             sender.setTitle("Vibr Off", forState: .Normal)
         }
+    }
+    @IBAction func ballModeBtnClicked(sender: UIButton) {
+        self.ballMode = !self.ballMode
+        sender.setTitle(self.ballMode ? "Ball Mode" : "Line Mode", forState: .Normal)
+        self.clearButtonClicked(clearButton)
+    }
+    
+    func resizeImage(image: UIImage, scale: CGFloat) -> UIImage {
+        
+        //let scale = newWidth / image.size.width
+        let newWidth = image.size.width * scale
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.view.userInteractionEnabled = true
+        
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.view.userInteractionEnabled = false
     }
 }
 

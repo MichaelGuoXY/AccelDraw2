@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E02FA5381C668AB20081C7B8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02FA5371C668AB20081C7B8 /* SettingsViewController.swift */; };
+		E0869E6E1C6FB7D8007DBBEC /* magic_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = E0869E6D1C6FB7D8007DBBEC /* magic_ball.png */; };
 		E0A10B561C66705500E7EB1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A10B551C66705500E7EB1F /* AppDelegate.swift */; };
 		E0A10B581C66705500E7EB1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A10B571C66705500E7EB1F /* ViewController.swift */; };
 		E0A10B5B1C66705500E7EB1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0A10B591C66705500E7EB1F /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		E02FA5371C668AB20081C7B8 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E0869E6D1C6FB7D8007DBBEC /* magic_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magic_ball.png; sourceTree = "<group>"; };
 		E0A10B521C66705500E7EB1F /* AccelDraw2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccelDraw2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0A10B551C66705500E7EB1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0A10B571C66705500E7EB1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		E0A10B541C66705500E7EB1F /* AccelDraw2 */ = {
 			isa = PBXGroup;
 			children = (
+				E0869E6D1C6FB7D8007DBBEC /* magic_ball.png */,
 				E0A10B551C66705500E7EB1F /* AppDelegate.swift */,
 				E0A10B571C66705500E7EB1F /* ViewController.swift */,
 				E0A10B591C66705500E7EB1F /* Main.storyboard */,
@@ -125,6 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0869E6E1C6FB7D8007DBBEC /* magic_ball.png in Resources */,
 				E0A10B601C66705500E7EB1F /* LaunchScreen.storyboard in Resources */,
 				E0A10B5D1C66705500E7EB1F /* Assets.xcassets in Resources */,
 				E0A10B5B1C66705500E7EB1F /* Main.storyboard in Resources */,

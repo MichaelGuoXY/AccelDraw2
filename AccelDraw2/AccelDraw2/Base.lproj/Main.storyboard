@@ -24,7 +24,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10 touches" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TAX-hC-lSL">
-                                <rect key="frame" x="120" y="561" width="92" height="30"/>
+                                <rect key="frame" x="349" y="30" width="92" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -43,14 +43,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1A-S6-oLY">
-                                <rect key="frame" x="217" y="561" width="77" height="30"/>
+                                <rect key="frame" x="120" y="561" width="77" height="30"/>
                                 <state key="normal" title="Stick Mode"/>
                                 <connections>
                                     <action selector="bounceModeBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fbw-Hh-pQM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySt-qk-Bwc">
-                                <rect key="frame" x="299" y="561" width="57" height="30"/>
+                                <rect key="frame" x="202" y="561" width="57" height="30"/>
                                 <state key="normal" title="Settings"/>
                                 <connections>
                                     <segue destination="JP9-8R-2ql" kind="show" id="bZj-bV-pv4"/>
@@ -61,11 +61,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9y0-2Q-3Lk">
+                                <rect key="frame" x="264" y="561" width="68" height="30"/>
+                                <state key="normal" title="Ball Mode"/>
+                                <connections>
+                                    <action selector="ballModeBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L8o-hZ-mUG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ySt-qk-Bwc" firstAttribute="height" secondItem="j1A-S6-oLY" secondAttribute="height" id="21T-s6-sFO"/>
+                            <constraint firstItem="j1A-S6-oLY" firstAttribute="top" secondItem="eVr-py-f3M" secondAttribute="bottom" constant="13" id="A2S-HS-Qjf"/>
                             <constraint firstItem="jae-pl-HIL" firstAttribute="leading" secondItem="eVr-py-f3M" secondAttribute="trailing" constant="-329" id="IYN-oO-AA2"/>
+                            <constraint firstItem="j1A-S6-oLY" firstAttribute="leading" secondItem="naK-HQ-T6l" secondAttribute="trailing" constant="5" id="Ize-Ud-qGQ"/>
+                            <constraint firstItem="TAX-hC-lSL" firstAttribute="top" secondItem="eVr-py-f3M" secondAttribute="top" id="J5U-8N-JUe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eVr-py-f3M" secondAttribute="trailing" id="Kr1-rQ-y7y"/>
                             <constraint firstItem="eVr-py-f3M" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="MpH-CK-PU0"/>
                             <constraint firstItem="ySt-qk-Bwc" firstAttribute="leading" secondItem="j1A-S6-oLY" secondAttribute="trailing" constant="5" id="Oty-yc-4Nv"/>
@@ -73,13 +83,17 @@
                             <constraint firstItem="ySt-qk-Bwc" firstAttribute="top" secondItem="j1A-S6-oLY" secondAttribute="top" id="QLy-dg-Qjp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eVr-py-f3M" secondAttribute="bottom" constant="52" id="Sxt-nN-jp6"/>
                             <constraint firstItem="naK-HQ-T6l" firstAttribute="height" secondItem="Fdu-3p-ynw" secondAttribute="height" id="XpD-PF-bZw"/>
+                            <constraint firstItem="TAX-hC-lSL" firstAttribute="leading" secondItem="jae-pl-HIL" secondAttribute="trailing" id="aeo-gL-Vkm"/>
                             <constraint firstItem="TAX-hC-lSL" firstAttribute="leading" secondItem="naK-HQ-T6l" secondAttribute="trailing" constant="5" id="atN-7L-slH"/>
+                            <constraint firstItem="j1A-S6-oLY" firstAttribute="top" secondItem="naK-HQ-T6l" secondAttribute="top" id="b18-ZD-Gmp"/>
                             <constraint firstAttribute="leadingMargin" secondItem="eVr-py-f3M" secondAttribute="leading" id="cBA-cn-s0c"/>
+                            <constraint firstItem="9y0-2Q-3Lk" firstAttribute="leading" secondItem="ySt-qk-Bwc" secondAttribute="trailing" constant="5" id="cD7-yS-msC"/>
                             <constraint firstItem="naK-HQ-T6l" firstAttribute="top" secondItem="Fdu-3p-ynw" secondAttribute="top" id="dNs-NV-i4C"/>
                             <constraint firstItem="jae-pl-HIL" firstAttribute="centerX" secondItem="eVr-py-f3M" secondAttribute="centerX" id="eIq-Ij-l5J"/>
                             <constraint firstItem="eVr-py-f3M" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="eRl-eA-6D2"/>
                             <constraint firstItem="j1A-S6-oLY" firstAttribute="leading" secondItem="TAX-hC-lSL" secondAttribute="trailing" constant="5" id="f5i-V0-ug0"/>
                             <constraint firstItem="jae-pl-HIL" firstAttribute="top" secondItem="eVr-py-f3M" secondAttribute="top" id="gZu-2K-F9F"/>
+                            <constraint firstItem="9y0-2Q-3Lk" firstAttribute="top" secondItem="ySt-qk-Bwc" secondAttribute="top" id="kQ5-o2-oV2"/>
                             <constraint firstItem="j1A-S6-oLY" firstAttribute="height" secondItem="TAX-hC-lSL" secondAttribute="height" id="sJ2-aT-es7"/>
                             <constraint firstItem="j1A-S6-oLY" firstAttribute="top" secondItem="TAX-hC-lSL" secondAttribute="top" id="w1B-FE-P7g"/>
                             <constraint firstItem="Fdu-3p-ynw" firstAttribute="top" secondItem="eVr-py-f3M" secondAttribute="bottom" constant="13" id="wKb-Cj-g0X"/>
@@ -93,10 +107,18 @@
                                 <exclude reference="MpH-CK-PU0"/>
                                 <exclude reference="yTc-28-jUa"/>
                                 <exclude reference="IYN-oO-AA2"/>
+                                <exclude reference="PiN-x7-NKv"/>
+                                <exclude reference="atN-7L-slH"/>
+                                <exclude reference="zMk-7W-IeM"/>
+                                <exclude reference="A2S-HS-Qjf"/>
+                                <exclude reference="f5i-V0-ug0"/>
+                                <exclude reference="sJ2-aT-es7"/>
+                                <exclude reference="w1B-FE-P7g"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="ballModeBtn" destination="9y0-2Q-3Lk" id="orf-hM-6Ye"/>
                         <outlet property="clearButton" destination="Fdu-3p-ynw" id="8vi-0f-4GY"/>
                         <outlet property="coorTextField" destination="jae-pl-HIL" id="3Vp-G7-wrb"/>
                         <outlet property="imageView" destination="eVr-py-f3M" id="JWd-xe-6bS"/>
@@ -108,7 +130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="369" y="284"/>
+            <point key="canvasLocation" x="358" y="261"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="sFY-KI-Tev">
