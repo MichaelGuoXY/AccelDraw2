@@ -8,17 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		E02FA5381C668AB20081C7B8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02FA5371C668AB20081C7B8 /* SettingsViewController.swift */; };
-		E0869E6E1C6FB7D8007DBBEC /* magic_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = E0869E6D1C6FB7D8007DBBEC /* magic_ball.png */; };
+		E09F9FED1C73D95900C1FC5B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09F9FEC1C73D95900C1FC5B /* DetailViewController.swift */; };
 		E0A10B561C66705500E7EB1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A10B551C66705500E7EB1F /* AppDelegate.swift */; };
 		E0A10B581C66705500E7EB1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A10B571C66705500E7EB1F /* ViewController.swift */; };
 		E0A10B5B1C66705500E7EB1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0A10B591C66705500E7EB1F /* Main.storyboard */; };
 		E0A10B5D1C66705500E7EB1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0A10B5C1C66705500E7EB1F /* Assets.xcassets */; };
 		E0A10B601C66705500E7EB1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0A10B5E1C66705500E7EB1F /* LaunchScreen.storyboard */; };
+		E0B4AE6D1C7504C00086AB3E /* ball_bounce.wav in Resources */ = {isa = PBXBuildFile; fileRef = E0B4AE6C1C7504C00086AB3E /* ball_bounce.wav */; };
+		E0B4AE6F1C750A380086AB3E /* scribble.wav in Resources */ = {isa = PBXBuildFile; fileRef = E0B4AE6E1C750A380086AB3E /* scribble.wav */; };
+		E0CE7F9B1C700AE500373447 /* tennis.png in Resources */ = {isa = PBXBuildFile; fileRef = E0CE7F961C700AE500373447 /* tennis.png */; };
+		E0CE7F9C1C700AE500373447 /* basketball.png in Resources */ = {isa = PBXBuildFile; fileRef = E0CE7F971C700AE500373447 /* basketball.png */; };
+		E0CE7F9D1C700AE500373447 /* pool_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = E0CE7F981C700AE500373447 /* pool_ball.png */; };
+		E0CE7F9E1C700AE500373447 /* magic_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = E0CE7F991C700AE500373447 /* magic_ball.png */; };
+		E0CE7F9F1C700AE500373447 /* soccer.png in Resources */ = {isa = PBXBuildFile; fileRef = E0CE7F9A1C700AE500373447 /* soccer.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E02FA5371C668AB20081C7B8 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		E0869E6D1C6FB7D8007DBBEC /* magic_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magic_ball.png; sourceTree = "<group>"; };
+		E09F9FEC1C73D95900C1FC5B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		E0A10B521C66705500E7EB1F /* AccelDraw2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccelDraw2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0A10B551C66705500E7EB1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0A10B571C66705500E7EB1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -26,6 +33,13 @@
 		E0A10B5C1C66705500E7EB1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0A10B5F1C66705500E7EB1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0A10B611C66705500E7EB1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0B4AE6C1C7504C00086AB3E /* ball_bounce.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ball_bounce.wav; sourceTree = "<group>"; };
+		E0B4AE6E1C750A380086AB3E /* scribble.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = scribble.wav; sourceTree = "<group>"; };
+		E0CE7F961C700AE500373447 /* tennis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tennis.png; sourceTree = "<group>"; };
+		E0CE7F971C700AE500373447 /* basketball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basketball.png; sourceTree = "<group>"; };
+		E0CE7F981C700AE500373447 /* pool_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pool_ball.png; sourceTree = "<group>"; };
+		E0CE7F991C700AE500373447 /* magic_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magic_ball.png; sourceTree = "<group>"; };
+		E0CE7F9A1C700AE500373447 /* soccer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soccer.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +72,16 @@
 		E0A10B541C66705500E7EB1F /* AccelDraw2 */ = {
 			isa = PBXGroup;
 			children = (
-				E0869E6D1C6FB7D8007DBBEC /* magic_ball.png */,
+				E0CE7F961C700AE500373447 /* tennis.png */,
+				E0CE7F971C700AE500373447 /* basketball.png */,
+				E0CE7F981C700AE500373447 /* pool_ball.png */,
+				E0CE7F991C700AE500373447 /* magic_ball.png */,
+				E0CE7F9A1C700AE500373447 /* soccer.png */,
+				E0B4AE6C1C7504C00086AB3E /* ball_bounce.wav */,
+				E0B4AE6E1C750A380086AB3E /* scribble.wav */,
 				E0A10B551C66705500E7EB1F /* AppDelegate.swift */,
 				E0A10B571C66705500E7EB1F /* ViewController.swift */,
+				E09F9FEC1C73D95900C1FC5B /* DetailViewController.swift */,
 				E0A10B591C66705500E7EB1F /* Main.storyboard */,
 				E02FA5371C668AB20081C7B8 /* SettingsViewController.swift */,
 				E0A10B5C1C66705500E7EB1F /* Assets.xcassets */,
@@ -128,10 +149,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0869E6E1C6FB7D8007DBBEC /* magic_ball.png in Resources */,
+				E0B4AE6F1C750A380086AB3E /* scribble.wav in Resources */,
+				E0CE7F9D1C700AE500373447 /* pool_ball.png in Resources */,
 				E0A10B601C66705500E7EB1F /* LaunchScreen.storyboard in Resources */,
+				E0B4AE6D1C7504C00086AB3E /* ball_bounce.wav in Resources */,
 				E0A10B5D1C66705500E7EB1F /* Assets.xcassets in Resources */,
+				E0CE7F9E1C700AE500373447 /* magic_ball.png in Resources */,
+				E0CE7F9F1C700AE500373447 /* soccer.png in Resources */,
+				E0CE7F9B1C700AE500373447 /* tennis.png in Resources */,
 				E0A10B5B1C66705500E7EB1F /* Main.storyboard in Resources */,
+				E0CE7F9C1C700AE500373447 /* basketball.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +172,7 @@
 				E0A10B581C66705500E7EB1F /* ViewController.swift in Sources */,
 				E0A10B561C66705500E7EB1F /* AppDelegate.swift in Sources */,
 				E02FA5381C668AB20081C7B8 /* SettingsViewController.swift in Sources */,
+				E09F9FED1C73D95900C1FC5B /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

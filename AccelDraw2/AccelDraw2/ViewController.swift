@@ -29,14 +29,20 @@ class ViewController: UIViewController {
     var currPoint = CGPointMake(0, 0)
     var startDrawing = false
     var touchCount = 0
+    var sumForPath = Float(0)
     
     var red = CGFloat(1)
     var green = CGFloat(0)
     var blue = CGFloat(0)
     var brushSize = CGFloat(5)
     var speed = CGFloat(5)
+    var speedSaved = CGFloat(5)
     
+    var ballImage = UIImage(named: "magic_ball")
     var magic_ball = UIImage(named: "magic_ball")
+    
+    let ballBounceSound: SystemSoundID = createBallBounceSound()
+    let pencilScribbleSound: SystemSoundID = createPencilScribbleSound()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +65,6 @@ class ViewController: UIViewController {
         ballModeBtn.layer.cornerRadius = CGFloat(6)
         
         // Do any additional setup after loading the view, typically from a nib.
-        
         
     }
     func accelSession() {
@@ -106,17 +111,16 @@ class ViewController: UIViewController {
         let context = UIGraphicsGetCurrentContext()
         // clear context before drawing
         CGContextClearRect(context, self.imageView.frame)
-
-        self.magic_ball = self.resizeImage(UIImage(named: "magic_ball")!, scale: brushSize/15.0)
-        self.magic_ball?.drawAtPoint(p)
-
+        
+        self.magic_ball = self.resizeImage(self.ballImage!, scale: brushSize/15.0)
+        self.magic_ball?.drawAtPoint(CGPointMake(p.x - (self.magic_ball?.size.width)!/2, p.y - (self.magic_ball?.size.height)!/2))
+        
         self.imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
     }
     
     func drawLine(fromPoint a: CGPoint, toPoint b: CGPoint) {
-        
         
         UIGraphicsBeginImageContext(self.imageView.frame.size)
         
@@ -128,12 +132,12 @@ class ViewController: UIViewController {
                 self.imageView.frame.size.height))
         
         
-//        let ori = CGPointMake(
-//            self.view.frame.origin.x +
-//                self.imageView.frame.size.width/2.0,
-//            self.view.frame.origin.y +
-//                self.imageView.frame.size.height/2.0
-//        )
+        //        let ori = CGPointMake(
+        //            self.view.frame.origin.x +
+        //                self.imageView.frame.size.width/2.0,
+        //            self.view.frame.origin.y +
+        //                self.imageView.frame.size.height/2.0
+        //        )
         
         // Specify line end points
         CGContextMoveToPoint(context, a.x, a.y)
@@ -144,6 +148,12 @@ class ViewController: UIViewController {
         CGContextSetRGBStrokeColor(context, red, green, blue, 1.0)
         CGContextSetLineCap(context, .Round)
         // renders the line into pixels
+        sumForPath += sqrt(powf(Float(a.x - b.x), 2) * powf(Float(a.y - b.y), 2))
+        if (sumForPath > 10) {
+            AudioServicesPlaySystemSound(pencilScribbleSound)
+            sumForPath = 0
+        }
+        
         CGContextStrokePath(context)
         
         self.imageView.image = UIGraphicsGetImageFromCurrentImageContext()
@@ -155,9 +165,9 @@ class ViewController: UIViewController {
     func stickToBounds(point: CGPoint) -> CGPoint{
         var nextPoint = point
         
-        let leftBound = self.imageView.bounds.origin.x
+        let leftBound = self.ballMode ? self.imageView.bounds.origin.x + (self.magic_ball?.size.width)!/2 : self.imageView.bounds.origin.x
         let rightBound = self.ballMode ? leftBound + self.imageView.bounds.size.width - (self.magic_ball?.size.width)! : leftBound + self.imageView.bounds.size.width
-        let topBound = self.imageView.bounds.origin.y
+        let topBound = self.ballMode ? self.imageView.bounds.origin.y + (self.magic_ball?.size.height)!/2 : self.imageView.bounds.origin.y
         let botBound = self.ballMode ? topBound + self.imageView.bounds.size.height - (self.magic_ball?.size.height)! : topBound + self.imageView.bounds.size.height
         
         if(nextPoint.x < leftBound) {
@@ -180,42 +190,49 @@ class ViewController: UIViewController {
     func bounceOnBounds(point: CGPoint) -> CGPoint{
         var nextPoint = point
         
-        let leftBound = self.imageView.bounds.origin.x
+        let leftBound = self.ballMode ? self.imageView.bounds.origin.x + (self.magic_ball?.size.width)!/2 : self.imageView.bounds.origin.x
         let rightBound = self.ballMode ? leftBound + self.imageView.bounds.size.width - (self.magic_ball?.size.width)! : leftBound + self.imageView.bounds.size.width
-        let topBound = self.imageView.bounds.origin.y
+        let topBound = self.ballMode ? self.imageView.bounds.origin.y + (self.magic_ball?.size.height)!/2 : self.imageView.bounds.origin.y
         let botBound = self.ballMode ? topBound + self.imageView.bounds.size.height - (self.magic_ball?.size.height)! : topBound + self.imageView.bounds.size.height
         
         if(nextPoint.x < leftBound || nextPoint.x > rightBound || nextPoint.y < topBound || nextPoint.y > botBound) {
             if(isVibrEnable) {
                 AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             }
+            if(ballMode) {
+                AudioServicesPlaySystemSound(ballBounceSound)
+                // decrease speed in bouncing
+                speed = speed * 0.7 - 0.1
+                if(speed < 0.1) {
+                    speed = 0
+                }
+            }
         }
         
         if(nextPoint.x < leftBound) {
-            nextPoint.x = leftBound + (leftBound - nextPoint.x) * 10
+            nextPoint.x = leftBound + speed * 10
         }
         if(nextPoint.x > rightBound) {
-            nextPoint.x = rightBound - (nextPoint.x - rightBound) * 10
+            nextPoint.x = rightBound - speed * 10
         }
         if(nextPoint.y < topBound) {
-            nextPoint.y = topBound + (topBound - nextPoint.y) * 10
+            nextPoint.y = topBound + speed * 10
         }
         if(nextPoint.y > botBound) {
-            nextPoint.y = botBound - (nextPoint.y - botBound) * 10
+            nextPoint.y = botBound - speed * 10
         }
         
         return nextPoint
-
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let settingsView = segue.destinationViewController as! SettingsViewController
-        
         settingsView.red = red
         settingsView.green = green
         settingsView.blue = blue
         settingsView.brushSize = brushSize
-        settingsView.speed = speed
+        settingsView.speed = speedSaved
         settingsView.delegate = self
     }
     
@@ -232,12 +249,36 @@ class ViewController: UIViewController {
             return
         }
         touchCount += 1
+        
+        
         touchCountTextField.text = "\(touchCount) touches"
         if(touchCount%2 == 1) {
             let touch = touches.first as UITouch!
             self.currPoint = touch.locationInView(self.imageView)
             coorTextField.text = String(format: "x: %.0f y: %.0f", self.currPoint.x, self.currPoint.y)
             startDrawing = true
+            speed = speedSaved
+            switch(touchCount % 5) {
+            case 0:
+                self.ballImage = UIImage(named: "basketball")
+                break
+            case 1:
+                self.ballImage = UIImage(named: "magic_ball")
+                break
+            case 2:
+                self.ballImage = UIImage(named: "pool_ball")
+                break
+            case 3:
+                self.ballImage = UIImage(named: "soccer")
+                break
+            case 4:
+                self.ballImage = UIImage(named: "tennis")
+                break
+            default:
+                self.ballImage = UIImage(named: "magic_ball")
+                break
+            }
+            
         } else {
             startDrawing = false
         }
@@ -281,12 +322,25 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.view.userInteractionEnabled = true
-        
     }
     
     override func viewWillDisappear(animated: Bool) {
         self.view.userInteractionEnabled = false
     }
+}
+
+func createBallBounceSound() -> SystemSoundID {
+    var soundID: SystemSoundID = 0
+    let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), "ball_bounce", "wav", nil)
+    AudioServicesCreateSystemSoundID(soundURL, &soundID)
+    return soundID
+}
+
+func createPencilScribbleSound() -> SystemSoundID {
+    var soundID: SystemSoundID = 1
+    let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), "scribble", "wav", nil)
+    AudioServicesCreateSystemSoundID(soundURL, &soundID)
+    return soundID
 }
 
 extension ViewController :SettingsViewControllerDelegate {
@@ -295,7 +349,6 @@ extension ViewController :SettingsViewControllerDelegate {
         self.green = green
         self.blue = blue
         self.brushSize = brushSize
-        self.speed = speed
+        self.speedSaved = speed
     }
 }
-
